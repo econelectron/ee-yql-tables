@@ -16,7 +16,7 @@
 				<key id='symbol' type='xs:string' paramType='path' required='true'/>
 			</inputs>
 			<execute><![CDATA[
-				var results = y.query("select * from csv where url=@url",{url:url});
+				var results = y.query("select * from html where url=@url",{url:url});
 				y.log(results);
       ]]></execute>
 		</select>
