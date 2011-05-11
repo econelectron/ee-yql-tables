@@ -1,25 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>  
-<table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">  
-  <meta>  
-    <sampleQuery>select * from {table} where a='cat' and b='dog';</sampleQuery>  
-  </meta>  
-  <bindings>  
-    <select itemPath="" produces="XML">  
-      <urls>  
-        <url>http://fake.url/{a}</url>  
-      </urls>  
-      <inputs>  
-        <key id='a' type='xs:string' paramType='path' required="true" />  
-        <key id='b' type='xs:string' paramType='variable' required="true" />  
-      </inputs>  
-      <execute><![CDATA[ 
-          // Your javascript goes here. We will run it on our servers 
-          response.object = <item> 
-                   <url>{request.url}</url> 
-                   <a>{a}</a> 
-                   <b>{b}</b> 
-                </item>; 
-      ]]></execute>  
-    </select>  
-  </bindings>  
+<?xml version="1.0" encoding="UTF-8" ?>
+<table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
+	<meta>
+		<author>John Purdum</author>
+		<!--
+		use "https://github.com/econelectron/ee-yql-tables/raw/master/yahoo.finance.stocks.company.xml" as ee.finance.stock.profile;select * from ee.finance.stock.profile where symbol = "YHOO";		
+		-->
+		<sampleQuery>select * from ee.finance.stock.profile where symbol = "YHOO"</sampleQuery>
+	</meta>
+	<bindings>
+		<select produces="XML">
+			<urls>
+				<url>http://www.reuters.com/finance/stocks/companyProfile?symbol={symbol}</url>
+			</urls>
+			<inputs>				
+				<key id='symbol' type='xs:string' paramType='path' required='true'/>
+			</inputs>
+			<execute><![CDATA[
+				var results = y.query("select * from html where url=@url",{url:url});
+				y.log(results);
+      ]]></execute>
+		</select>
+	</bindings>
 </table>
