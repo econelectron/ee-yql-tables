@@ -5,7 +5,7 @@
 		<!--
 		use "https://docs.google.com/uc?id=0B9B1n4-x6D2jZTlhYzU2MzMtN2I3Yy00YWRlLWFmMDAtMzEwOTgyMzlkYTBl&export=download&hl=en";select * from ee.finance.stock.profile where symbol = "GOOG";		
 		-->
-		<sampleQuery>select * from ee.finance.stock.profile where symbol = "YHOO"</sampleQuery>
+		<sampleQuery>select * from {table} where symbol = "YHOO"</sampleQuery>
 	</meta>
 	<bindings>
 		<select itemPath="" produces="XML">
