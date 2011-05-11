@@ -1,24 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
-	<meta>
-		<author>John Purdum</author>
-		<!--
-		use "https://docs.google.com/uc?id=0B9B1n4-x6D2jZTlhYzU2MzMtN2I3Yy00YWRlLWFmMDAtMzEwOTgyMzlkYTBl&export=download&hl=en";select * from ee.finance.stock.profile where symbol = "GOOG";		
-		-->
-		<sampleQuery>select * from {table} where symbol = "YHOO"</sampleQuery>
-	</meta>
-	<bindings>
-		<select itemPath="" produces="XML">
-			<urls>
-				<url>http://www.reuters.com/finance/stocks/companyProfile?symbol={symbol}</url>
-			</urls>
-			<inputs>				
-				<key id='symbol' type='xs:string' paramType='path' required='true'/>
-			</inputs>
-			<execute><![CDATA[
-				var results = y.query("select * from html where url=@url",{url:url});
-				y.log(results);
-      ]]></execute>
-		</select>
-	</bindings>
+<?xml version="1.0" encoding="UTF-8"?>  
+<table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">  
+  <meta>  
+    <sampleQuery>select * from {table} where a='cat' and b='dog';</sampleQuery>  
+  </meta>  
+  <bindings>  
+    <select itemPath="" produces="XML">  
+      <urls>  
+        <url>http://fake.url/{a}</url>  
+      </urls>  
+      <inputs>  
+        <key id='a' type='xs:string' paramType='path' required="true" />  
+        <key id='b' type='xs:string' paramType='variable' required="true" />  
+      </inputs>  
+      <execute><![CDATA[ 
+          // Your javascript goes here. We will run it on our servers 
+          response.object = <item> 
+                   <url>{request.url}</url> 
+                   <a>{a}</a> 
+                   <b>{b}</b> 
+                </item>; 
+      ]]></execute>  
+    </select>  
+  </bindings>  
 </table>
